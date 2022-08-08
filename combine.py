@@ -2,6 +2,38 @@ import pickle
 import os 
 import re
 
+def plddt_array(pathname): 
+    f = open(pathname, "r")
+    contents = f.readlines()
+
+    for count, string in enumerate(contents): 
+        if 'plddt' in string: 
+            new_contents = contents[count:]
+
+    delete = re.search(r'(.*\[).*\)(.*)', str(new_contents))
+    # print(f"group 1 = {delete.group(1)} \ngroup 2 = {delete.group(2)}")
+
+    plddt_vals = str(new_contents).replace(delete.group(1), '').replace(delete.group(2), '').replace('])', '')
+    plddt_array = []
+
+    for items in plddt_vals.split(','): 
+        val = re.sub('[^0-9.]*', '', items)
+        if val != '': 
+            plddt_array.append(val)
+            
+    return plddt_array 
+
+def unpickle(pathname): 
+    f = open(pathname, "rb")        
+    data = pickle.load(f)
+    new_pathname = pathname.replace('pkl', 'txt')
+    f1 = open(new_pathname, "w")
+    f1.write(str(data))
+    f1.close()
+    
+    return new_pathname
+    
+
 path="AlphaFoldResults"
 directories = []
 
@@ -15,29 +47,8 @@ for d in directories:
     for files in os.listdir(new_path): 
         if re.match("result_model_[0-9].pkl", files): 
             pathname = new_path + files
-            f = open(pathname, "rb")
-            data = pickle.load(f)
-            new_pathname = pathname.replace('pkl', 'txt')
-            f1 = open(new_pathname, "w")
-            f1.write(str(data))
-            f1.close()
+            unpickled_model = unpickle(pathname)
+            plddt_values = plddt_array(unpickled_model)
+            print(unpickled_model, len(plddt_values))            
             
-            f = open(new_pathname, "r")
-            contents = f.readlines()
-
-            for count, string in enumerate(contents): 
-                if 'plddt' in string: 
-                    new_contents = contents[count:]
-
-            delete = re.search(r'(.*\[).*\)(.*)', str(new_contents))
-            # print(f"group 1 = {delete.group(1)} \ngroup 2 = {delete.group(2)}")
-
-            plddt_vals = str(new_contents).replace(delete.group(1), '').replace(delete.group(2), '').replace('])', '')
-            plddt_array = []
-
-            for items in plddt_vals.split(','): 
-                val = re.sub('[^0-9.]*', '', items)
-                if val != '': 
-                    plddt_array.append(val)
-                    
-            print(f'pathname: {new_pathname} length: {len(plddt_array)}')
+           
