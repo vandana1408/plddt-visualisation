@@ -2,6 +2,7 @@ import pickle
 import os 
 import re
 
+# function to retrieve the plddt values from the results model file. 
 def plddt_array(pathname): 
     f = open(pathname, "r")
     contents = f.readlines()
@@ -23,6 +24,7 @@ def plddt_array(pathname):
             
     return plddt_array 
 
+# function for unpickling the results models in the alphafold directory 
 def unpickle(pathname): 
     f = open(pathname, "rb")        
     data = pickle.load(f)
