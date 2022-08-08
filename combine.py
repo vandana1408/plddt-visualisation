@@ -34,21 +34,23 @@ def unpickle(pathname):
     return new_pathname
     
 
-path="AlphaFoldResults"
-directories = []
+if __name__ == "__main__": 
+    path="AlphaFoldResults"
+    directories = []
 
-# Gather all directory names to construct paths for unpickling and matching 
-for dirs in os.listdir(path): 
-    directories.append(dirs)
-    
-# unpickle with all pathnames 
-for d in directories:
-    new_path = path + '/' + d + '/'
-    for files in os.listdir(new_path): 
-        if re.match("result_model_[0-9].pkl", files): 
-            pathname = new_path + files
-            unpickled_model = unpickle(pathname)
-            plddt_values = plddt_array(unpickled_model)
-            print(unpickled_model, len(plddt_values))            
+    # Gather all directory names to construct paths for unpickling and matching 
+    for dirs in os.listdir(path): 
+        directories.append(dirs)
+        
+    # unpickle with all pathnames 
+    for d in directories:
+        new_path = path + '/' + d + '/'
+        for files in os.listdir(new_path): 
+            if re.match("result_model_[0-9].pkl", files): 
+                pathname = new_path + files
+                unpickled_model = unpickle(pathname)
+                plddt_values = plddt_array(unpickled_model)
+                
+                print(unpickled_model, len(plddt_values))            
             
            
