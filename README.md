@@ -11,5 +11,8 @@ Section of combine.py that handles unpickling the result model file from each pr
 **plddt_values.py**
 Section of combine.py that takes the unpickled file and returns an array of the plddt values and it's count 
 
+**pdb_reader.py** 
+Section of combine.py that will read the pdb file into a data frame and access the b_factor values (that appear to be unique to the amino acids in the file?).
+
 
 
