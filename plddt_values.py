@@ -1,7 +1,21 @@
 import re 
-import json
-
 #filename = "AlphaFoldResults/Hsp16.9_and_Hsp17.5_1/result_model_1.json"
+
+# path="AlphaFoldResults"
+# directories = []
+
+# # Gather all directory names to construct paths for unpickling and matching 
+
+# for dirs in os.listdir(path): 
+#     directories.append(dirs)
+
+# for d in directories: 
+#     new_path = path + '/' + d + '/'
+#     for files in os.listdir(new_path): 
+#         new_pathname = new_path + files
+#         f = open(new_pathname, 'r')
+#         print(f.read())
+
 
 f = open("AlphaFoldResults/Hsp16.9_and_Hsp17.5_1/result_model_1.txt", "r")
 contents = f.readlines()
@@ -21,4 +35,4 @@ for items in plddt_vals.split(','):
     if val != '': 
         plddt_array.append(val)
         
-print(len(plddt_array))
+print(plddt_array)

@@ -6,12 +6,10 @@ path="AlphaFoldResults"
 directories = []
 
 # Gather all directory names to construct paths for unpickling and matching 
-
 for dirs in os.listdir(path): 
     directories.append(dirs)
     
-# json_pathnames = []
-
+# unpickle with all pathnames 
 for d in directories:
     new_path = path + '/' + d + '/'
     for files in os.listdir(new_path): 
@@ -24,26 +22,7 @@ for d in directories:
             f1.write(str(data))
             f1.close()
             
-        
-            # json_pathnames.append(new_pathname)
-
-
-        
+            
+            
     
-
-
-# from collections import Counter
-
-# def most_common():
-#     infile = open("shapecolour.p",'rb')
-#     new_list = pickle.load(infile) 
-#     infile.close()
-    
-#     dict_counter = Counter((item['shape'], item['colour']) for item in new_list)
-#     shape, colour = dict_counter.most_common(1)[0][0][0], dict_counter.most_common(1)[0][0][1]
-    
-#     return {'shape': shape, 'colour': colour}
-
-# if __name__ == "__main__": 
-#     print(most_common())
 
