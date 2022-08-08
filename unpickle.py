@@ -1,7 +1,6 @@
 import pickle 
 import os 
 import re
-import json
 
 path="AlphaFoldResults"
 directories = []
